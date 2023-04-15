@@ -17,20 +17,20 @@ class BinarySearchTree {
 
   add(data) {
     let leaf = new Node(data)
-    if (this.tree === null) {
+    if (!this.tree) {
       this.tree = leaf
       return this.tree
     }
     const addLeaf = (node, leaf) => {
       if (leaf.data < node.data) {
-        if (node.left === null) {
+        if (!node.left) {
           return node.left = leaf
         } else {
           addLeaf(node.left, leaf)
         }
       }
       if (leaf.data >= node.data) {
-        if (node.right === null) {
+        if (!node.right) {
           return node.right = leaf
         } else {
           addLeaf(node.right, leaf)
@@ -68,7 +68,7 @@ class BinarySearchTree {
 
   remove(data) {
     const removeDataInTree = (node, data) => {
-      if (node === null) return null
+      if (!node) return null
 
       if (data < node.data) {
         node.left = removeDataInTree(node.left, data)
@@ -77,9 +77,8 @@ class BinarySearchTree {
         node.right = removeDataInTree(node.right, data)
         return node
       } else {
-        if (node.jeft === null && node.rught === null) return null
-        if (node.left === null || node.right === null) {
-          node = node.left === null ? node.right : node.left
+        if (!node.left || !node.right) {
+          node = !node.left ? node.right : node.left
           return node
         }
 
@@ -93,14 +92,14 @@ class BinarySearchTree {
   }
 
   min(node = this.tree) {
-    if (node.left === null) {
+    if (!node.left) {
       return node.data
     }
     return this.min(node.left)
   }
 
   max(node = this.tree) {
-    if (node.right === null) {
+    if (!node.right) {
       return node.data
     }
     return this.max(node.right)
